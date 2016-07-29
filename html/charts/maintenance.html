@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<div class="row">
+   <div class="col-md-2">Next Service</div>
+   <div class="col-md-2" id="milestone"></div>
+</div>
+<div class="row">
+   <div class="col-md-2">Miles Remaining</div>
+   <div class="col-md-2" id="remaining"></div>
+</div>
+<div class="row">
+   <div class="col-md-2">Estimated Date of Next Service</div>
+   <div class="col-md-2" id="date"></div>
+</div>
+<script src="http://d3js.org/d3.v3.js"></script>
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+<script src="/js/jquery.csv.min.js"></script>
+
+<script>
+$.ajax({
+    url: "data/maintenance.csv",
+    async: false,
+    success: function (csvd) {
+        data = $.csv.toArrays(csvd);
+    },
+    dataType: "text",
+    complete: function () {
+        $("#milestone").html(data[1][1]);
+        $("#remaining").html(data[1][1] - data[1][0]);
+        $("#date").html(new Date(data[1][2]));
+    }
+});
+</script>
+
+<script>
+
+function get_remaining(dataset) {
+   diff = Math.round(dataset["total"]-dataset["progress"])+" Miles";
+   return diff;
+}
+
+var parseDate = d3.time.format("%Y-%m-%d").parse;
+ 
+var width = 960,
+    height = 500,
+    twoPi = 2 * Math.PI;
+
+var progress = 0;
+var total = 0;
+
+var globalDate;
+
+d3.csv("data/maintenance.csv",
+        function(d) {
+          progress = d.Distance;
+          total = d.Milestone;
+          date = d.Date;
+          globalDate = date;
+        },
+        function(error, data) {
+         var dataset = {
+                           progress: progress,
+                           total: total,
+                           date: date
+                       };
+
+         var arc = d3.svg.arc()
+             .innerRadius(85)
+             .outerRadius(110)
+             .startAngle(0);
+          
+         var svg = d3.select("body").append("svg")
+             .attr("width", width)
+             .attr("height", height)
+           .append("g")
+             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+
+         var meter = svg.append("g")
+             .attr("class", "season-progress");
+          
+         var background = meter.append("path")
+             .datum({endAngle: twoPi})
+             .style("fill", "#ddd")
+             .attr("d", arc);
+          
+         var foreground = meter.append("path")
+             .datum({endAngle:0})
+             .style("fill", "orange")
+             .attr("class", "foreground")
+             .attr("d", arc);
+          
+           foreground.transition()
+             .duration(1000)
+             .ease("linear")
+             .attrTween("d", function(d) {
+                        var interpolate = d3.interpolate(d.endAngle, twoPi * dataset["progress"] / dataset["total"])
+                        return function(t) {
+                           d.endAngle = interpolate(t);
+                           return arc(d);
+                        }  
+                     });
+
+         var text =  meter.append("text")
+             .attr("text-anchor", "middle")
+             .attr("dy", ".35em")
+             .attr("font-size", "24")
+             .text(get_remaining(dataset));
+      });
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+      <link rel="manifest" href="/manifest.json">
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+      <meta name="theme-color" content="#ffffff">
+      <title>My Volvo S60 Stats</title>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+   <body>
+      <div class="container">
+
+         <div class="starter-template">
+            <h1>Overview</h1>
+            <div class="row">
+               <div  id="calendar">
+                  <h3>Usage</h3>
+                  <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="/charts/progress.html" marginwidth="0" marginheight="0" style="width:1000px;height:500px;border:none;" scrolling="no"></iframe>
+               </div>
+            </div><!--row-->
+            <div class="row">
+               <div  id="calendar">
+                  <h3>Calendar View</h3>
+                  <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="/charts/calendar2.html" marginwidth="0" marginheight="0" style="width:960px;height:480px;border:none;" scrolling="no"></iframe>
+               </div>
+            </div><!--row-->
+            <div class="row">
+               <div  id="line">
+                  <h3>Total Distance Per Day</h3>
+                  <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="/charts/line.html" marginwidth="0" marginheight="0" style="width:960px;height:270px;border:none;" scrolling="no"></iframe>
+               </div>
+            </div><!--row-->
+            <div class="row">
+               <div  id="horiz-bar">
+                  <h3>Cumulated Distance</h3>
+                  <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="/charts/cumgraph.html" marginwidth="0" marginheight="0" style="width:1000px;height:500px;border:none;" scrolling="no"></iframe>
+               </div>
+            </div><!--row-->
+            <div class="row">
+               <div  id="horiz-bar">
+                  <h3>Maintenance Schedule</h3>
+                  <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="/charts/maintenance.html" marginwidth="0" marginheight="0" style="width:1000px;height:500px;border:none;" scrolling="no"></iframe>
+               </div>
+            </div><!--row-->
+         </div>
+
+      </div><!-- /.container -->
+      
+      <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+      <script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+   </body>
+
+</html>
